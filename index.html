@@ -66,6 +66,7 @@
         
         <div class="info">
             <strong>Course:</strong> Web Applications Programming
+        </div>
         
         <div class="info">
             <strong>Major:</strong> Computer Engineer
@@ -79,55 +80,63 @@
             Determining time period...
         </div>
     </div>
-     <script>
-        function updateBackgroundColor() {
-            const now = new Date();
-            const hour = now.getHours();
-            const body = document.body;
-            const periodInfo = document.getElementById('periodInfo');
-            
-            let colorScheme = '';
-            let period = '';
-            
-            if (hour >= 6 && hour < 12) {
-                // Morning (6am-12pm): Soft sunrise colors
-                body.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)';
-                period = 'Morning';
-                colorScheme = 'Color 1 - Soft Pink Sunrise';
-            } else if (hour >= 12 && hour < 18) {
-                // Afternoon (12pm-6pm): Bright sky blue
-                body.style.background = 'linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #74b9ff 100%)';
-                period = 'Afternoon';
-                colorScheme = 'Color 2 - Sky Blue';
-            } else if (hour >= 18 && hour < 21) {
-                // Evening (6pm-9pm): Sunset orange
-                body.style.background = 'linear-gradient(135deg, #fd79a8 0%, #fdcb6e 50%, #e17055 100%)';
-                period = 'Evening';
-                colorScheme = 'Color 3 - Sunset Orange';
-            } else {
-                // Night (9pm-6am): Deep purple/navy
-                body.style.background = 'linear-gradient(135deg, #2d3436 0%, #636e72 50%, #2d3436 100%)';
-                period = 'Night';
-                colorScheme = 'Color 4 - Deep Night';
+
+    <script>
+        // Wait for the page to fully load before running JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateBackgroundColor() {
+                const now = new Date();
+                const hour = now.getHours();
+                const body = document.body;
+                const periodInfo = document.getElementById('periodInfo');
+                
+                let colorScheme = '';
+                let period = '';
+                
+                if (hour >= 6 && hour < 12) {
+                    // Morning (6am-12pm): Soft sunrise colors
+                    body.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)';
+                    period = 'Morning';
+                    colorScheme = 'Color 1 - Soft Pink Sunrise';
+                } else if (hour >= 12 && hour < 18) {
+                    // Afternoon (12pm-6pm): Bright sky blue
+                    body.style.background = 'linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #74b9ff 100%)';
+                    period = 'Afternoon';
+                    colorScheme = 'Color 2 - Sky Blue';
+                } else if (hour >= 18 && hour < 21) {
+                    // Evening (6pm-9pm): Sunset orange
+                    body.style.background = 'linear-gradient(135deg, #fd79a8 0%, #fdcb6e 50%, #e17055 100%)';
+                    period = 'Evening';
+                    colorScheme = 'Color 3 - Sunset Orange';
+                } else {
+                    // Night (9pm-6am): Deep purple/navy
+                    body.style.background = 'linear-gradient(135deg, #2d3436 0%, #636e72 50%, #2d3436 100%)';
+                    period = 'Night';
+                    colorScheme = 'Color 4 - Deep Night';
+                }
+                
+                if (periodInfo) {
+                    periodInfo.textContent = `Current period: ${period} (${colorScheme})`;
+                }
             }
             
-            periodInfo.textContent = `Current period: ${period} (${colorScheme})`;
-        }
-        
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            const dateString = now.toLocaleDateString();
+            function updateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString();
+                const dateString = now.toLocaleDateString();
+                
+                const timeDisplay = document.getElementById('timeDisplay');
+                if (timeDisplay) {
+                    timeDisplay.textContent = `${dateString} - ${timeString}`;
+                }
+                
+                updateBackgroundColor();
+            }
             
-            document.getElementById('timeDisplay').textContent = 
-                `${dateString} - ${timeString}`;
-            
-            updateBackgroundColor();
-        }
-        
-        
-        updateTime();
-        setInterval(updateTime, 1000);
+            // Update immediately and then every second
+            updateTime();
+            setInterval(updateTime, 1000);
+        });
     </script>
 </body>
 </html>
